@@ -11,8 +11,20 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="szakdolgozatoklistazasa">
 
-                        <div class="lista">
+                        <div class="szakdogalista">
                             <div class="fejlec">
+                                <div class="szakdogacime">Szakdolgozat címe</div>
+                                <div class="tagok">Készítők neve</div>
+                                <div class="githublink">GitHub link</div>
+                                <div class="oldallink">Szakdolgozat elérhetősége</div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="footer">
+                            <div class="szakdoga">
                                 <div class="szakdogacime">Szakdolgozat címe</div>
                                 <div class="tagok">Készítők neve</div>
                                 <div class="githublink">GitHub link</div>

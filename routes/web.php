@@ -25,6 +25,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::get('/api/szakdogak', [SzakdogaController::class, 'index']);
+Route::post('/api/szakdogak', [SzakdogaController::class, 'store']);
+
+
 require __DIR__ . '/auth.php';
 
 require __DIR__ . '/auth.php';
