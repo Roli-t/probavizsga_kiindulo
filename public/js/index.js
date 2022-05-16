@@ -2,54 +2,63 @@ $(function() {
     const myAjax = new MyAjax();
     let apiVegpont = "/api/szakdogak";
     myAjax.adatmegjelenit(apiVegpont, false, tablazatba);
-
     function tablazatba(tomb) {
         console.log(tomb);
-        const szuloElem = $(".tablazat table");
-
-        const sablonElem = $(".footer .szakdoga ");
-        sablonElem.show();
+        const szuloElem = $("section table tbody");
+        const sablonElem = $("aside table tr");
         szuloElem.empty();
-        szuloElem.append("<tr><th>Szakdolgozat címe</th><th>Készítők neve</th><th>Github link</th><th>Szakdolgozat elérhetőség</th><th></th><th></th></tr > ");
-        tomb.forEach(function(elem) {
-            console.log(elem);
-            let node = sablonElem.clone().appendTo(szuloElem);
-            new Szakdoga(node, elem);
+        tomb.forEach(function(elem) {    
+            let sablonClone = sablonElem.clone();
+            sablonClone.show();
+            let node=sablonClone.appendTo(szuloElem);
+            const obj = new Szakdoga(node, elem);
         });
         sablonElem.hide();
         $(sablonElem).hide();
     }
 
     $(window).on("szerkesztes", (event) => {
-        apiVegpont = "/api/szakdogak";
-        let adat = {
-            cime: $('.szakdolgozatCime').val(),
-            neve: $('.keszitokNeve').val(),
-            oldalElerhetosege: $('.oldalElerhetosege').val(),
-            gitHubElerhetosege: $('.gitHubElerhetosege').val(),
-        }
-        console.log(adat);
-        myAjax.adatmodosit(apiVegpont, adat, event.detail.id);
+        id= event.detail.id;
+            $('#szakdoga_nev').val(event.detail.szakdoga_nev);
+           $('#tagokneve').val(event.detail.tagokneve);
+            $('#githublink').val(event.detail.githublink);
+            $('#oldallink').val(event.detail.oldallink);
+    });
+
+    $(window).on("torles", (event) => {
+        myAjax.adattorol(apiVegpont,event.detail.id);
         window.location.reload();
     });
-    $(window).on("torles", (event) => {
-        let id = event.detail.id;
-        apiVegpont = "/api/szakdogak";
-        myAjax.adattorol(apiVegpont, id);
 
-
-    });
-
-    $(".felvisz").on("click", () => {
-        $(".githubElerhetoseg").val();
-        apiVegpont = "/api/szakdogak";
-        szoveg = {
-            szakdolgozatCime: $(".szakdolgozatCime").val(),
-            keszitokNeve: $(".keszitokNeve").val(),
-            oldalElerhetosege: $(".oldalElerhetosege").val(),
-            gitHubElerhetosege: $(".gitHubElerhetosege").val()
-        }
-        console.log(szoveg);
+    $("#uj").on("click", () => {
+        
+            let szakdoga_nev= $("#szakdoga_nev").val();
+            let tagokneve= $("#tagokneve").val();
+           let oldallink= $("#oldallink").val();
+            let githublink= $("#githublink").val();
+        let szoveg={
+            "szakdoga_nev": szakdoga_nev,
+            "tagokneve": tagokneve,
+            "githublink": githublink,
+            "oldallink": oldallink
+        };
+        
         myAjax.adatbekuld(apiVegpont, szoveg);
     });
+
+    $("#modosit").on("click", () => {
+        
+        let szakdoga_nev= $("#szakdoga_nev").val();
+        let tagokneve= $("#tagokneve").val();
+       let oldallink= $("#oldallink").val();
+        let githublink= $("#githublink").val();
+    let szoveg={
+        "szakdoga_nev": szakdoga_nev,
+        "tagokneve": tagokneve,
+        "githublink": githublink,
+        "oldallink": oldallink
+    };
+    
+    myAjax.adatmodosit(apiVegpont, szoveg, id);
+});
 });

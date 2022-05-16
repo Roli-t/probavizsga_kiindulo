@@ -13,39 +13,24 @@ class SzakdogaController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
-           'szakdolgozatCime'=>'required',
-           'keszitokNeve'=>'required',
-           'oldalElerhetosege'=>'required',
-           'gitHubElerhetosege'=>'required',
-       ]);
-       $uj =new szakdoga;
-       $uj->szakdoga_nev=$request->szakdolgozatCime;
-       $uj->githublink=$request->gitHubElerhetosege;
-       $uj->oldallink=$request->oldalElerhetosege;
-       $uj->tagokneve=$request->keszitokNeve;
+       $uj =new szakdoga();
+       $uj->szakdoga_nev=$request->szakdoga_nev;
+       $uj->githublink=$request->githublink;
+       $uj->oldallink=$request->oldallink;
+       $uj->tagokneve=$request->tagokneve;
        $uj -> save();
-       return response()->json(true);
 
    }
-   public function destroy(string $id){
+   public function destroy($id){
     $szakdoga=szakdoga::find($id);
     $szakdoga->delete();
-    return response()->json(true);
 }
-public function update(Request $request, string $id){
-    $request->validate([
-        'cime'=>'required',
-        'neve'=>'required',
-        'oldalElerhetosege'=>'required',
-        'gitHubElerhetosege'=>'required'
-    ]);
+public function update(Request $request, $id){
+    
     szakdoga::find($id)
-    ->update(['szakdoga_nev' => $request -> cime,
-        'githublink' => $request -> gitHubElerhetosege,
-        'tagokneve' => $request -> neve,
-        'oldallink' => $request -> oldalElerhetosege,]);
-
-    return response()->json(true);
+    ->update(['szakdoga_nev' => $request -> szakdoga_nev,
+        'githublink' => $request -> githublink,
+        'tagokneve' => $request -> tagokneve,
+        'oldallink' => $request -> oldallink,]);
 }
 }

@@ -27,6 +27,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/api/szakdogak', [SzakdogaController::class, 'index']);
 Route::post('/api/szakdogak', [SzakdogaController::class, 'store']);
+Route::delete('/api/szakdogak/{id}', [SzakdogaController::class, 'destroy']);
+Route::put('/api/szakdogak/{id}', [SzakdogaController::class, 'update']);
 
 
 require __DIR__ . '/auth.php';

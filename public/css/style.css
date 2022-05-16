@@ -17,9 +17,11 @@ body {
     font-size: 20px;
 }
 
-.tablazat table {
+table {
     border-collapse: collapse;
     width: 100%;
+    border: 1px solid grey;
+
 }
 
 .felvisz {
@@ -29,17 +31,18 @@ body {
     border-radius: 4px;
 }
 
-.tablazat td,
-.tablazat th {
+td,
+th {
     text-align: left;
     padding: 8px;
+    border: 1px solid grey;
 }
 
-.tablazat tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: #6e6d6d;
 }
 
-.tablazat table th {
+table th {
     background-color: rgb(65, 65, 65);
     color: white;
 }
